@@ -25,6 +25,20 @@ const App = () => {
       [name]: value,
     }));
   };
+
+  const handleBtn = e => {
+    setStage(prev => (prev + 1));
+  };
+
+  const handleCancel = e => {
+    setValues(prev => {
+      Object.keys(prev).forEach(v => {
+        prev[v] = ""
+      })
+      return prev;
+    });
+    setStage(0);
+  };
   return (
     <div className="App">
       <main>
@@ -39,7 +53,7 @@ const App = () => {
               </div>
             </div>
             <form>
-              <div className="section1">
+              <div className={`section1 ${stage !== 1 ? "d-none" : ""}`}>
                 <div className="form-group">
                   <label htmlFor="customerName">Name</label>
                   <input
@@ -99,8 +113,8 @@ const App = () => {
                         name="LGA"
                         className="form-control"
                         id="LGA"
-                        value={values.address2}
-                        handleChange={handleChange}
+                        value={values.LGA}
+                        onChange={handleChange}
                       />
                     </div>
                   </div>
@@ -128,7 +142,7 @@ const App = () => {
                 </div>
               </div>
 
-              <div className="section2">
+              <div className={`section2 ${stage !== 2 ? "d-none" : ""}`}>
                 <div className="form-group">
                   <label htmlFor="cardName">Name on Card</label>
                   <input
@@ -214,7 +228,7 @@ const App = () => {
                 </div>
               </div>
 
-              <div className="section3">
+              <div className={`section3 ${stage !== 3 ? "d-none" : ""}`}>
                 <table>
                   <tr>
                     <th>Item Name</th>
@@ -242,8 +256,8 @@ const App = () => {
                 </table>
               </div>
               <div className="btn-container">
-                <button>Next</button>
-                <button>Cancel Payment</button>
+                <button type="button" onClick={handleBtn}>{stage === 3 ? "Pay" : "Next"}</button>
+                <button type="button" onClick={handleCancel}>Cancel Payment</button>
               </div>
             </form>
           </div>
