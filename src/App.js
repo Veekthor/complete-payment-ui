@@ -1,5 +1,30 @@
-const App = () => {
+import { useState } from "react";
 
+const App = () => {
+  const [stage, setStage] = useState(0);
+  const [values, setValues] = useState({
+    name: "",
+    email: "",
+    address: "",
+    address2: "",
+    LGA: "",
+    location: "",
+    cardName: "",
+    cardType: "",
+    cardNumber: "",
+    expiryMonth: "",
+    expiryYear: "",
+    cvv: "",
+  });
+
+  // handle input change event
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setValues((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
   return (
     <div className="App">
       <main>
@@ -17,58 +42,118 @@ const App = () => {
               <div className="section1">
                 <div className="form-group">
                   <label htmlFor="customerName">Name</label>
-                  <input type="text" className="form-control" name="name" id="customerName"/>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="name"
+                    id="customerName"
+                    value={values.name}
+                    onChange={handleChange}
+                  />
                 </div>
                 <div className="form-group">
                   <label htmlFor="customerEmail">Email Address</label>
 
-                  <small id="emailHelp" className="form-text text-muted">The purchase receipt would be sent to this address.</small>
+                  <small id="emailHelp" className="form-text text-muted">
+                    The purchase receipt would be sent to this address.
+                  </small>
 
-                  <input type="email" className="form-control" id="customerEmail" name="email" aria-describedby="emailHelp"/>
-
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="customerEmail"
+                    name="email"
+                    aria-describedby="emailHelp"
+                    value={values.email}
+                    onChange={handleChange}
+                  />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="address1">Address 1</label>
-                  <input type="text" name="address1" className="form-control" id="address1"/>
+                  <label htmlFor="address">Address 1</label>
+                  <input
+                    type="text"
+                    name="address"
+                    className="form-control"
+                    id="address"
+                    value={values.address}
+                    onChange={handleChange}
+                  />
                 </div>
                 <div className="form-group">
                   <label htmlFor="address2">Address 2</label>
-                  <input type="text" name="address2" className="form-control" id="address2"/>
+                  <input
+                    type="text"
+                    name="address2"
+                    className="form-control"
+                    id="address2"
+                    value={values.address2}
+                    onChange={handleChange}
+                  />
                 </div>
                 <div className="form-row">
                   <div className="col">
                     <div className="form-group">
                       <label htmlFor="LGA">Local Government</label>
-                      <input type="text" name="LGA" className="form-control" id="LGA"/>
+                      <input
+                        type="text"
+                        name="LGA"
+                        className="form-control"
+                        id="LGA"
+                        value={values.address2}
+                        handleChange={handleChange}
+                      />
                     </div>
                   </div>
                   <div className="col">
                     <div className="form-group">
                       <label htmlFor="location">State</label>
-                      <select name="location" className="form-control" id="location">
-                        <option>Abia</option>
-                        <option>Lagos</option>
-                        <option>Enugu</option>
-                        <option>Kaduna</option>
-                        <option>Ebonyi</option>
+                      <select
+                        name="location"
+                        className="form-control"
+                        id="location"
+                        value={values.location}
+                        onChange={handleChange}
+                      >
+                        <option className="d-none" value="">
+                          Select State
+                        </option>
+                        <option value="Abia">Abia</option>
+                        <option value="Lagos">Lagos</option>
+                        <option value="Enugu">Enugu</option>
+                        <option value="Kaduna">Kaduna</option>
+                        <option value="Ebonyi">Ebonyi</option>
                       </select>
                     </div>
                   </div>
-                  
                 </div>
               </div>
 
               <div className="section2">
                 <div className="form-group">
                   <label htmlFor="cardName">Name on Card</label>
-                  <input type="text" className="form-control" name="cardName" id="cardName"/>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="cardName"
+                    id="cardName"
+                    value={values.cardName}
+                    onChange={handleChange}
+                  />
                 </div>
                 <div className="form-group">
                   <label htmlFor="cardType">Card Type</label>
-                  <select className="form-control" id="cardType">
-                    <option>Visa</option>
-                    <option>MasterCard</option>
-                    <option>Verve</option>
+                  <select
+                    className="form-control"
+                    onChange={handleChange}
+                    value={values.cardType}
+                    id="cardType"
+                  >
+                    <option className="d-none" value="">
+                      Select Type
+                    </option>
+                    <option value="Visa">Visa</option>
+                    <option value="MasterCard">MasterCard</option>
+                    <option value="Verve">Verve</option>
                   </select>
                 </div>
 
@@ -76,19 +161,54 @@ const App = () => {
                   <div className="col">
                     <div className="form-group">
                       <label htmlFor="cardNumber">Card details</label>
-                      <input type="text" name="cardNumber" className="form-control" id="cardNumber"/>
+                      <input
+                        type="text"
+                        name="cardNumber"
+                        className="form-control"
+                        id="cardNumber"
+                        value={values.cardNumber}
+                        onChange={handleChange}
+                      />
                     </div>
                   </div>
                   <div className="col">
                     <div className="form-group">
-                      <label htmlFor="expiryDate">Expiry date</label>
-                      <input type="text" name="expiryDate" className="form-control" id="expiryDate"/>
+                      <label htmlFor="expiryMonth">Expiry date</label>
+                      <div className="expiry-container">
+                        <input
+                          type="text"
+                          name="expiryMonth"
+                          className="form-control"
+                          id="expiryMonth"
+                          value={values.expiryMonth}
+                          placeholder="MM"
+                          onChange={handleChange}
+                        />
+                        <span>/</span>
+                        <input
+                          type="text"
+                          name="expiryYear"
+                          className="form-control"
+                          id="expiryYear"
+                          value={values.expiryYear}
+                          placeholder="YY"
+                          onChange={handleChange}
+                        />
+                      </div>
+                      
                     </div>
                   </div>
                   <div className="col">
                     <div className="form-group">
                       <label htmlFor="cvv">CVV</label>
-                      <input type="text" name="cvv" className="form-control" id="cvv"/>
+                      <input
+                        type="text"
+                        name="cvv"
+                        className="form-control"
+                        id="cvv"
+                        value={values.cvv}
+                        onChange={handleChange}
+                      />
                     </div>
                   </div>
                 </div>
@@ -119,7 +239,6 @@ const App = () => {
                     <td>Total</td>
                     <td>50,000</td>
                   </tr>
-
                 </table>
               </div>
               <div className="btn-container">
@@ -132,6 +251,6 @@ const App = () => {
       </main>
     </div>
   );
-}
+};
 
 export default App;
