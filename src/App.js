@@ -1,5 +1,6 @@
 import Cleave from "cleave.js/react";
 import { useState } from "react";
+import { ReactComponent as CheckIcon} from './assets/icons/check2.svg';
 
 const App = () => {
   const [stage, setStage] = useState(1);
@@ -44,14 +45,14 @@ const App = () => {
       <main>
         <article>
           <div className="container">
-            <div className="form-header">
+            {stage < 4 && <div className="form-header">
               <h2 className="color-blue-100">Complete your Purchase</h2>
               <nav className={`stage-${stage}`}>
                 <span className={`${stage === 1 ? "active" : ""}`}>Personal Info</span>
                 <span className={`text-center ${stage === 2 ? "active" : ""}`}>Billing Info</span>
                 <span className={`text-center ${stage === 3 ? "active" : ""}`}>Complete Payment</span>
               </nav>
-            </div>
+            </div>}
             <div className={`section1 ${stage !== 1 ? "d-none" : ""}`}>
               <div className="form-group">
                 <label htmlFor="customerName">Name</label>
@@ -245,14 +246,29 @@ const App = () => {
                 </div>
               </div>
             </div>
-            <div className="btn-container">
+
+
+            <div className={`section4 ${stage !== 4 ? "d-none" : ""}`}>
+              <div className="payment-complete-container">
+                <div className="inner-container">
+                  <p className="check-icon"><CheckIcon /></p>
+                  <h1 className="color-blue-100">Purchase Completed</h1>
+                  <p>Please check your email for details concerning this transaction.</p>
+                  <p>
+                    <button onClick={handleCancel}>Return Home</button>
+                  </p>
+                </div>
+                
+              </div>
+            </div>
+            {stage < 4 && <div className="btn-container">
               <button type="button" className="pay-btn" onClick={handleBtn}>
                 {stage === 3 ? "Pay" : "Next"}
               </button>
               <button type="button" className="cancel-btn color-blue-100" onClick={handleCancel}>
                 Cancel Payment
               </button>
-            </div>
+            </div>}
           </div>
         </article>
       </main>
