@@ -66,7 +66,7 @@ const App = () => {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="customerEmail">Email Address</label>
+                <label className="required" htmlFor="customerEmail">Email Address</label>
 
                 <small id="emailHelp" className="form-text text-muted">
                   The purchase receipt would be sent to this address.
@@ -146,7 +146,7 @@ const App = () => {
 
             <div className={`section2 ${stage !== 2 ? "d-none" : ""}`}>
               <div className="form-group">
-                <label htmlFor="cardName">Name on Card</label>
+                <label className="required" htmlFor="cardName">Name on Card</label>
                 <input
                   type="text"
                   className="form-control"
@@ -157,7 +157,7 @@ const App = () => {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="cardType">Card Type</label>
+                <label className="required" htmlFor="cardType">Card Type</label>
                 <div className="select-wrapper">
                   <select
                     className="form-control"
@@ -178,7 +178,7 @@ const App = () => {
               <div className="form-row card-details-row">
                 <div className="card-num-col">
                   <div className="form-group">
-                    <label htmlFor="cardNumber">Card number</label>
+                    <label className="required" htmlFor="cardNumber">Card number</label>
                     <Cleave
                       options={{ creditCard: true }}
                       value={values.cardNumber}
@@ -191,7 +191,7 @@ const App = () => {
                 </div>
                 <div className="card-exp-col">
                   <div className="form-group">
-                    <label htmlFor="expiryDate">Expiry date</label>
+                    <label className="required" htmlFor="expiryDate">Expiry date</label>
                     <Cleave
                       name="expiryDate"
                       className="form-control"
@@ -205,7 +205,7 @@ const App = () => {
                 </div>
                 <div className="card-cvv-col">
                   <div className="form-group">
-                    <label htmlFor="cvv">CVV</label>
+                    <label className="required" htmlFor="cvv">CVV</label>
                     <input
                       type="tel"
                       name="cvv"
