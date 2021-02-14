@@ -1,5 +1,5 @@
 import Cleave from "cleave.js/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const App = () => {
   const [stage, setStage] = useState(1);
@@ -45,12 +45,12 @@ const App = () => {
         <article>
           <div className="container">
             <div className="form-header">
-              <h2>Complete your Purchase</h2>
-              <div>
-                <a href="#!">Personal Info</a>
-                <a href="#!">Billing Info</a>
-                <a href="#!">Complete Payment</a>
-              </div>
+              <h2 className="color-blue-100">Complete your Purchase</h2>
+              <nav className={`stage-${stage}`}>
+                <span className={`${stage === 1 ? "active" : ""}`}>Personal Info</span>
+                <span className={`text-center ${stage === 2 ? "active" : ""}`}>Billing Info</span>
+                <span className={`text-center ${stage === 3 ? "active" : ""}`}>Complete Payment</span>
+              </nav>
             </div>
             <div className={`section1 ${stage !== 1 ? "d-none" : ""}`}>
               <div className="form-group">

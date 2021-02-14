@@ -1,3 +1,46 @@
+/* NAV BAR */
+nav {
+  margin-bottom: 40px;
+  font-size: 23px;
+  color: #bdbdbd;
+  border-bottom: 1px solid black;
+  display: flex;
+  padding-bottom: 27px;
+  position: relative;
+}
+
+nav:after {
+  content: ' ';
+  position: absolute;
+  bottom: -8px;
+  width: 32%;
+  background: #f2994a;
+  height: 15px;
+  border-radius: 12px;
+  transition: 500ms;
+  left: 0;
+}
+
+nav.stage-2::after {
+  left: 33%;
+  width: 30%;
+}
+
+nav.stage-3::after {
+  left: 63%;
+  width: 37%;
+}
+
+nav span {
+  flex-basis: 32%;
+}
+
+nav span.active{
+  color: #f2994a;
+}
+
+/* Forms */
+
 .form-group {
   margin-top: 10px;
 }
@@ -123,6 +166,10 @@ select.form-control {
 
 .text-right{
   text-align: right !important;
+}
+
+.text-center{
+  text-align: center !important;
 }
 
 .total-inner {
