@@ -1,4 +1,5 @@
-import { useState } from "react";
+import Cleave from "cleave.js/react";
+import { useEffect, useState } from "react";
 
 const App = () => {
   const [stage, setStage] = useState(0);
@@ -12,8 +13,7 @@ const App = () => {
     cardName: "",
     cardType: "",
     cardNumber: "",
-    expiryMonth: "",
-    expiryYear: "",
+    expiryDate: "",
     cvv: "",
   });
 
@@ -26,15 +26,15 @@ const App = () => {
     }));
   };
 
-  const handleBtn = e => {
-    setStage(prev => (prev + 1));
+  const handleBtn = (e) => {
+    setStage((prev) => prev + 1);
   };
 
-  const handleCancel = e => {
-    setValues(prev => {
-      Object.keys(prev).forEach(v => {
-        prev[v] = ""
-      })
+  const handleCancel = (e) => {
+    setValues((prev) => {
+      Object.keys(prev).forEach((v) => {
+        prev[v] = "";
+      });
       return prev;
     });
     setStage(0);
@@ -52,7 +52,6 @@ const App = () => {
                 <a href="#!">Complete Payment</a>
               </div>
             </div>
-            <form>
               <div className={`section1 ${stage !== 1 ? "d-none" : ""}`}>
                 <div className="form-group">
                   <label htmlFor="customerName">Name</label>
@@ -105,7 +104,7 @@ const App = () => {
                   />
                 </div>
                 <div className="form-row">
-                  <div className="col">
+                  <div className="LGA-col">
                     <div className="form-group">
                       <label htmlFor="LGA">Local Government</label>
                       <input
@@ -118,25 +117,27 @@ const App = () => {
                       />
                     </div>
                   </div>
-                  <div className="col">
+                  <div className="col state-col">
                     <div className="form-group">
                       <label htmlFor="location">State</label>
-                      <select
-                        name="location"
-                        className="form-control"
-                        id="location"
-                        value={values.location}
-                        onChange={handleChange}
-                      >
-                        <option className="d-none" value="">
-                          Select State
-                        </option>
-                        <option value="Abia">Abia</option>
-                        <option value="Lagos">Lagos</option>
-                        <option value="Enugu">Enugu</option>
-                        <option value="Kaduna">Kaduna</option>
-                        <option value="Ebonyi">Ebonyi</option>
-                      </select>
+                      <div className="select-wrapper">
+                        <select
+                          name="location"
+                          className="form-control"
+                          id="location"
+                          value={values.location}
+                          onChange={handleChange}
+                        >
+                          <option className="d-none" value="">
+                            Select State
+                          </option>
+                          <option value="Abia">Abia</option>
+                          <option value="Lagos">Lagos</option>
+                          <option value="Enugu">Enugu</option>
+                          <option value="Kaduna">Kaduna</option>
+                          <option value="Ebonyi">Ebonyi</option>
+                        </select>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -156,67 +157,56 @@ const App = () => {
                 </div>
                 <div className="form-group">
                   <label htmlFor="cardType">Card Type</label>
-                  <select
-                    className="form-control"
-                    onChange={handleChange}
-                    value={values.cardType}
-                    id="cardType"
-                  >
-                    <option className="d-none" value="">
-                      Select Type
-                    </option>
-                    <option value="Visa">Visa</option>
-                    <option value="MasterCard">MasterCard</option>
-                    <option value="Verve">Verve</option>
-                  </select>
+                  <div className="select-wrapper">
+                    <select
+                      className="form-control"
+                      onChange={handleChange}
+                      value={values.cardType}
+                      id="cardType"
+                    >
+                      <option className="d-none" value="">
+                        Select Type
+                      </option>
+                      <option value="Visa">Visa</option>
+                      <option value="MasterCard">MasterCard</option>
+                      <option value="Verve">Verve</option>
+                    </select>
+                  </div>
                 </div>
 
-                <div className="form-row">
-                  <div className="col">
+                <div className="form-row card-details-row">
+                  <div className="card-num-col">
                     <div className="form-group">
-                      <label htmlFor="cardNumber">Card details</label>
-                      <input
-                        type="text"
+                      <label htmlFor="cardNumber">Card number</label>
+                      <Cleave
+                        options={{creditCard: true}}
+                        value={values.cardNumber}
                         name="cardNumber"
+                        onChange={handleChange}
                         className="form-control"
                         id="cardNumber"
-                        value={values.cardNumber}
-                        onChange={handleChange}
                       />
                     </div>
                   </div>
-                  <div className="col">
+                  <div className="card-exp-col">
                     <div className="form-group">
-                      <label htmlFor="expiryMonth">Expiry date</label>
-                      <div className="expiry-container">
-                        <input
-                          type="text"
-                          name="expiryMonth"
-                          className="form-control"
-                          id="expiryMonth"
-                          value={values.expiryMonth}
-                          placeholder="MM"
-                          onChange={handleChange}
-                        />
-                        <span>/</span>
-                        <input
-                          type="text"
-                          name="expiryYear"
-                          className="form-control"
-                          id="expiryYear"
-                          value={values.expiryYear}
-                          placeholder="YY"
-                          onChange={handleChange}
-                        />
-                      </div>
-                      
+                      <label htmlFor="expiryDate">Expiry date</label>
+                      <Cleave
+                        name="expiryDate"
+                        className="form-control"
+                        placeholder="MM/YY"
+                        id="expiryDate"
+                        value={values.expiryDate}
+                        onChange={handleChange}
+                        options={{date: true, datePattern: ['m', 'y']}}
+                      />
                     </div>
                   </div>
-                  <div className="col">
+                  <div className="card-cvv-col">
                     <div className="form-group">
                       <label htmlFor="cvv">CVV</label>
                       <input
-                        type="text"
+                        type="tel"
                         name="cvv"
                         className="form-control"
                         id="cvv"
@@ -256,10 +246,13 @@ const App = () => {
                 </table>
               </div>
               <div className="btn-container">
-                <button type="button" onClick={handleBtn}>{stage === 3 ? "Pay" : "Next"}</button>
-                <button type="button" onClick={handleCancel}>Cancel Payment</button>
+                <button type="button" onClick={handleBtn}>
+                  {stage === 3 ? "Pay" : "Next"}
+                </button>
+                <button type="button" onClick={handleCancel}>
+                  Cancel Payment
+                </button>
               </div>
-            </form>
           </div>
         </article>
       </main>
