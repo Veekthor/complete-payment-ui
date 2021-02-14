@@ -299,4 +299,31 @@ button,
   color: #f2994a;
   padding: 0;
 }
+
+@media screen and (max-width: 600px) {
+  .container{
+    max-width: 100%;
+    padding: 0 15px;
+  }
+
+  nav {
+    font-size: 5vw;
+  }
+
+  .form-row {
+    flex-wrap: wrap;
+  }
+
+  .form-row .LGA-col, .form-row .state-col {
+    flex-basis: 100%;
+  }
+
+  .card-num-col {
+    flex-basis: 100%;
+  }
+
+  .card-exp-col, .card-cvv-col {
+    flex-basis: 40%;
+  }
+}
  
