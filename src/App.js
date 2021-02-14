@@ -2,7 +2,7 @@ import Cleave from "cleave.js/react";
 import { useEffect, useState } from "react";
 
 const App = () => {
-  const [stage, setStage] = useState(0);
+  const [stage, setStage] = useState(1);
   const [values, setValues] = useState({
     name: "",
     email: "",
@@ -37,7 +37,7 @@ const App = () => {
       });
       return prev;
     });
-    setStage(0);
+    setStage(1);
   };
   return (
     <div className="App">
@@ -246,10 +246,10 @@ const App = () => {
               </div>
             </div>
             <div className="btn-container">
-              <button type="button" onClick={handleBtn}>
+              <button type="button" className="pay-btn" onClick={handleBtn}>
                 {stage === 3 ? "Pay" : "Next"}
               </button>
-              <button type="button" onClick={handleCancel}>
+              <button type="button" className="cancel-btn color-blue-100" onClick={handleCancel}>
                 Cancel Payment
               </button>
             </div>
